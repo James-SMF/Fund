@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from datetime import datetime
 
-def fetch_fund_nav(fund_code: str) -> pd.DataFrame:
+def fetch_fund_nav(fund_code: str, period: int) -> pd.DataFrame:
     url = f"http://fund.eastmoney.com/pingzhongdata/{fund_code}.js"
     headers = {
         "User-Agent": "Mozilla/5.0"
@@ -23,7 +23,7 @@ def fetch_fund_nav(fund_code: str) -> pd.DataFrame:
         'nav': item['y']
     } for item in records])
 
-    df = df.tail(90)
+    df = df.tail(period)
 
     df.to_csv(f"data/{fund_code}.csv", index=False)
     return df

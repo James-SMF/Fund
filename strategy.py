@@ -16,7 +16,13 @@ def apply_moving_average_strategy(df: pd.DataFrame, real_time_estimate: float, t
     df.loc[df['nav'] < df['ma'], 'signal'] = 1  # 模拟买入
     df.loc[df['nav'] > df['ma'] + threshold, 'signal'] = -2
     df.loc[df['nav'] < df['ma'] - threshold, 'signal'] = 2
-    print(f'当前估算净值：{real_time_estimate}，策略执行结果：{df["signal"].iloc[-1]}')
+
+    diff = df['nav'] - df['ma']
+    print(diff.iloc[-1])
+    print(df['ma'])
+
+    today_amount = diff.iloc[-1] / 0.0005
+    print(f'当前估算净值：{real_time_estimate}，策略执行结果：{df["signal"].iloc[-1]}，今日建议操作金额比例：{today_amount}%')
     return df
 
 #  def last_transaction_based_strategy(df):
