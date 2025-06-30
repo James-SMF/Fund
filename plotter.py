@@ -12,6 +12,9 @@ def plot_strategy(df: pd.DataFrame):
     buy = df[df['signal'] == 2]
     sell = df[df['signal'] == -2]
 
+    #  buy = df[df['rsi_signal'] == 1]
+    #  sell = df[df['rsi_signal'] == -1]
+
     plt.scatter(buy['date'], buy['nav'], label='Buy', marker='^', color='green')
     plt.scatter(sell['date'], sell['nav'], label='Sell', marker='v', color='red')
 

@@ -23,9 +23,9 @@ def fetch_fund_nav(fund_code: str, period: int) -> pd.DataFrame:
         'nav': item['y']
     } for item in records])
 
-    df = df.tail(period)
-
     df.to_csv(f"data/{fund_code}.csv", index=False)
+
+    df = df.tail(period)
     return df
 
 def fetch_fund_estimate(fund_code: str) -> dict:
@@ -47,3 +47,6 @@ def fetch_fund_estimate(fund_code: str) -> dict:
     except Exception as e:
         print("估算数据解析失败：", e)
         return None
+
+if __name__ == '__main__':
+    print(fetch_fund_nav('012553', 30))
